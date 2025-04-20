@@ -1,0 +1,113 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    overflow: hidden;
+}
+
+/* Main Container */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.container {
+    position: relative;
+    width: 600px;
+    height: 375px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Sprite Animation */
+#sprite {
+    width: 600px;
+    height: 326px;
+    background: url('../img/spritesheet-animation-2.png') no-repeat;
+    background-size: 6000px 326px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.play-btn {
+    position: absolute;
+    bottom: 0;
+    padding: 10px 20px;
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    cursor: pointer;
+}
+
+#fade-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.fade-in {
+    display: block !important;
+    visibility: visible !important;
+    animation: fadeIn 1s forwards;
+}
+
+.fade-out {
+    animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@keyframes play-sprite {
+    0% { background-position: 0 0; }
+    10% { background-position: -600px 0; }
+    20% { background-position: -1200px 0; }
+    30% { background-position: -1800px 0; }
+    40% { background-position: -2400px 0; }
+    50% { background-position: -3000px 0; }
+    60% { background-position: -3600px 0; }
+    70% { background-position: -4200px 0; }
+    80% { background-position: -4800px 0; }
+    90% { background-position: -5400px 0; }
+    100% { background-position: -6000px 0; }
+}
+
+.animate {
+    animation: play-sprite 1s steps(1) forwards;
+}

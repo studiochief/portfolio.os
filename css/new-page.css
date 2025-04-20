@@ -1,0 +1,370 @@
+body {
+    margin: 0; 
+    height: 100vh; 
+    overflow: hidden; 
+    position: relative; 
+    background-image: url('../img/background-image2.png');
+    background-size: cover; 
+    background-position: center; 
+    background-color: #111; 
+}
+
+/* Main Container */
+.sidebar {
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Icons */
+.icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+}
+
+.icon img {
+    width: 75px;
+    height: 75px;
+    margin-bottom: 5px;
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+    transition: all 0.3s ease;
+}
+
+.icon:hover img {
+    filter: brightness(1.1);
+}
+
+.icon span {
+    background-color: black;
+    color: white;
+    padding: 5px;
+    width: 75px;
+    text-align: center;
+    transition: background 0.3s ease-in;
+    font-size: 14px;
+}
+
+.icon span:hover {
+    background: linear-gradient(
+        90deg,
+        red,
+        orange,
+        yellow,
+        green,
+        blue,
+        indigo,
+        violet,
+        red 
+    );
+    background-size: 700% 100%;
+    animation: rainbowBackground 3s steps(10, end) infinite;
+    cursor: pointer;
+}
+
+@keyframes rainbowBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Windows */
+.window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    min-width: 600px;
+    min-height: 400px;
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+}
+
+.window.active {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+@keyframes oldSchoolOpen {
+    0% { transform: translate(-50%, -50%) scale(0); }
+    33% { transform: translate(-50%, -50%) scale(0.4); }
+    66% { transform: translate(-50%, -50%) scale(0.7); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes oldSchoolClose {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    33% { transform: translate(-50%, -50%) scale(0.7); }
+    66% { transform: translate(-50%, -50%) scale(0.4); }
+    100% { transform: translate(-50%, -50%) scale(0); }
+}
+
+.window-opening {
+    animation: oldSchoolOpen 0.25s steps(3);
+}
+
+.window-closing {
+    animation: oldSchoolClose 0.25s steps(3);
+}
+
+.window-header {
+    background-color: #f5f5f5;
+    color: #333;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    user-select: none;
+}
+
+.window-header button {
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    color: #333;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.window-header button:hover {
+    background-color: #ff0000;
+    color: white;
+    border-color: #cc0000;
+}
+
+.window-content {
+    padding: 15px;
+    background-color: #fff;
+  
+    overflow-y: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-content: flex-start;
+}
+
+/* Update icon layout in windows */
+.window .icon {
+    flex: 0 0 auto;
+    margin: 5px;
+    width: 80px;
+}
+
+.window .icon img {
+    width: 75px;
+    height: 75px;
+    margin-bottom: 4px;
+}
+
+.window .icon span {
+    font-size: 14px;
+    width: 75px;
+    background-color: black;
+    color: white;
+    padding: 5px;
+}
+
+.window .icon span:hover {
+    background: linear-gradient(
+        90deg,
+        red,
+        orange,
+        yellow,
+        green,
+        blue,
+        indigo,
+        violet,
+        red 
+    );
+    background-size: 700% 100%;
+    animation: rainbowBackground 3s steps(10, end) infinite;
+}
+
+/* Taskbar */
+.taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #0078d7;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    z-index: 99;
+}
+
+.start-button {
+    background-color: #005a9e;
+    color: white;
+    font-weight: bold;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.clock {
+    margin-left: auto;
+    color: white;
+    font-family: monospace;
+    margin-right: 20px;
+    text-align: right;
+    background-color: #005a9e;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Start Menu */
+.start-menu {
+    position: fixed;
+    bottom: 50px;
+    left: 0;
+    width: 200px;
+    background-color: #0078d7;
+    border: 1px solid #005a9e;
+    display: none;
+    z-index: 98;
+}
+
+.start-menu-item {
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.start-menu-item:hover {
+    background-color: #005a9e;
+}
+
+/* Error Window */
+.error-window {
+    width: 450px;
+    min-width: auto;
+    min-height: auto;
+    height: 300px;
+    background-color: #ffdddd;
+    border: 2px solid #ff0000;
+}
+
+.error-window .window-content {
+    background-color: #ffdddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.error-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 20px;
+}
+
+.error-button {
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#error-message {
+    font-size: 18px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.error-window.window-opening {
+    animation: oldSchoolOpen 0.25s steps(3);
+}
+
+.error-window.window-closing {
+    animation: oldSchoolClose 0.25s steps(3);
+}
+
+/* Trashcan Container */
+.trashcan-container {
+    position: fixed;
+    right: 10px;
+    bottom: 60px;
+    z-index: 100;
+}
+
+/* About Me window specific styles */
+#over-mij-window {
+    width: 1000px;
+    height: 800px;
+}
+
+#over-mij-window .window-content {
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    height: calc(100% - 40px);
+}
+
+#over-mij-window .window-content img {
+    width: 1000px;
+    height: auto;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+/* Image viewer window styles */
+#image-viewer-window {
+    width: 1000px;
+    height: 800px;
+}
+
+#image-viewer-window .window-content {
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    height: calc(100% - 40px);
+}
+
+#image-viewer-window .window-content img {
+    width: 1000px;
+    height: auto;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+/* Rest of your existing styles... */

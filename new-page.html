@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="nl">
+    
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio.os</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/new-page.css">
+    <!-- JAVA -->
+    <script defer src="js/new-page.js"></script>
+    <!--FAVICON -->
+    <link rel="icon" href="img/Contact-icon.png" type="image/png">
+    <link rel="shortcut icon" href="img/Contact-icon.png" type="image/png">
+</head>
+
+<body>
+    <!-- INSTRUCTIONS POPUP -->
+    <div id="instructions-window" class="window">
+        <div class="window-header">
+            <span>Welcome to Portfolio.os!</span>
+            <button onclick="closeWindow('instructions')">X</button>
+        </div>
+        <div class="window-content" style="padding: 15px;">
+            <p><strong>How does it work?</strong></p>
+            <ul style="margin-top: 10px; padding-left: 20px;">
+                <li>Click on icons to open programs</li>
+                <li>Don't drag windows (just like Windows 98!)</li>
+                <li>Double-clicking does nothing (for real nostalgia)</li>
+                <li>DO NOT check the trashcan</li>
+            </ul>
+            <div style="text-align: center; margin-top: 20px;">
+                <button 
+                    onclick="closeWindow('instructions')" 
+                    style="padding: 10px 20px; background: #0078d7; color: white; border: none; cursor: pointer;"
+                >
+                    Understood!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DESKTOP APPLICATIES LINKSBOVEN -->
+    <div class="sidebar">
+        <!-- PORTFOLIO -->
+        <div class="icon" onclick="openWindow('portfolio')">
+            <img src="img/Bestand.png" alt="Portfolio">
+            <span>Portfolio</span>
+        </div>
+        <!-- CONTACT -->
+        <div class="icon" onclick="openWindow('contact')">
+            <img src="img/Contact-icon.png" alt="Contact">
+            <span>Contact</span>
+        </div>
+        <!-- OVER MIJ -->
+        <div class="icon" onclick="openWindow('over-mij')">
+            <img src="img/Computer.png" alt="Over Mij">
+            <span>About Me</span>
+        </div>
+        <!-- SOFTWARE -->
+        <div class="icon" onclick="openWindow('software')">
+            <img src="img/application_folder.png" alt="Software">
+            <span>Software</span>
+        </div>
+    </div>
+
+    <!-- PRULLENBAK -->
+    <div class="trashcan-container">
+        <div class="icon" onclick="openWindow('trashcan')">
+            <img src="img/Trash.png" alt="Prullenbak">
+            <span>Trashcan</span>
+        </div>
+    </div>
+
+    <!-- TASKBAR -->
+    <div class="taskbar">
+        <!-- STARTKNOP -->
+        <button class="start-button" onclick="toggleStartMenu()">Start</button>
+        <!-- KLOCK -->
+        <div class="clock" id="clock"></div>
+    </div>
+
+    <!-- START MENU -->
+    <div id="start-menu" class="start-menu">
+        <div class="start-menu-item" onclick="openWindowAndCloseMenu('portfolio')">Portfolio</div>
+        <div class="start-menu-item" onclick="openWindowAndCloseMenu('contact')">Contact</div>
+        <div class="start-menu-item" onclick="openWindowAndCloseMenu('over-mij')">About Me</div>
+        <div class="start-menu-item" onclick="openWindowAndCloseMenu('software')">Software</div>
+        <div class="start-menu-item" onclick="window.location.href='index.html?nocache=' + Date.now()">Reboot</div>
+    </div>
+
+    <!-- VENSTERS -->
+
+    <!-- PORTFOLIO VENSTER -->
+    <div id="portfolio-window" class="window">
+        <div class="window-header">
+            <span>Portfolio</span>
+            <button onclick="closeWindow('portfolio')">X</button>
+        </div>
+        <div class="window-content">
+            <div class="icon" onclick="openWindow('mcuden')">
+                <img src="img/Bestand.png" alt="MC Uden">
+                <span>MC Uden</span>
+            </div>
+            <div class="icon" onclick="openWindow('vhs')">
+                <img src="img/Bestand.png" alt="VHS">
+                <span>Veghel Hartsave</span>
+            </div>
+            <div class="icon" onclick="openWindow('studiochief')">
+                <img src="img/Bestand.png" alt="Studio Chief">
+                <span>Studio Chief</span>
+            </div>
+            <div class="icon" onclick="openWindow('depul')">
+                <img src="img/Bestand.png" alt="De Pul">
+                <span>De Pul</span>
+            </div>
+            <div class="icon" onclick="openWindow('diverse')">
+                <img src="img/Bestand.png" alt="Diverse projecten">
+                <span>Other</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT VENSTER -->
+    <div id="contact-window" class="window">
+        <div class="window-header">
+            <span>Contact</span>
+            <button onclick="closeWindow('contact')">X</button>
+        </div>
+        <div class="window-content" style="display: flex; justify-content: center; align-items: center; padding: 0;">
+            <img 
+                src="img/contact-informatie2.png" 
+                alt="Contactgegevens" 
+                style="max-width: 100%; max-height: 100%; object-fit: contain;"
+            >
+        </div>
+    </div>
+
+    <!-- OVER MIJ VENSTER-->
+    <div id="over-mij-window" class="window wide-window">
+        <div class="window-header">
+            <span>About me</span>
+            <button onclick="closeWindow('over-mij')">X</button>
+        </div>
+        <div class="window-content" style="padding: 10px 10px 5px 10px;">
+            <img 
+                src="img/about-me.png" 
+                alt="Over Mij informatie" 
+                style="width: 1095px; max-width: none; height: auto;"
+            >
+        </div>
+    </div>
+
+    <!-- MC UDEN VENSTER-->
+    <div id="mcuden-window" class="window">
+        <div class="window-header">
+            <span>MC Uden</span>
+            <button onclick="closeWindow('mcuden')">X</button>
+        </div>
+        <div class="window-content"> 
+            <div class="icon" onclick="openImageWindow('mc-uden-homepage')">
+                <img src="img/mc-uden-image.png" alt="MC Uden Foto">
+                <span>mcuden .jpg</span>
+            </div>
+            <a href="https://www.figma.com/proto/bquXsNLNJiYa78qwAJXNv0/MC-UDEN?page-id=0%3A1&node-id=81-3&viewport=307%2C632%2C0.23&t=sBCR5kOAT3FI8aMW-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=81%3A3&show-proto-sidebar=1">
+                <div class="icon">
+                    <img src="img/File.png" alt="Studio Chief">
+                    <span>mcuden .exe</span>
+                </div>
+            </a>
+            <div class="icon" onclick="openImageWindow('mc_design_process')">
+                <img src="img/Bestand.png" alt="MC Uden Project 2">
+                <span>Design Process</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- VEGHEL HARTSAVE VENSTER -->
+    <div id="vhs-window" class="window">
+        <div class="window-header">
+            <span>Veghel Hartsave</span>
+            <button onclick="closeWindow('vhs')">X</button>
+        </div>
+        <div class="window-content">
+            <div class="icon" onclick="openImageWindow('vhs-homepage')">
+                <img src="img/vhs_image_icon.png" alt="Veghel Hartsave">
+                <span>vhs.jpg</span>
+            </div>
+            <a href="https://veghelhartsave.nl/" target="_blank">
+                <div class="icon">
+                    <img src="img/File.png" alt="Veghel Hartsave">
+                    <span>vhs.exe</span>
+                </div>
+            </a>
+            <div class="icon" onclick="openImageWindow('vhs_design_proces')">
+                <img src="img/Bestand.png" alt="Design Process">
+                <span>Design Process</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- STUDIO CHIEF VENSTER-->
+    <div id="studiochief-window" class="window">
+        <div class="window-header">
+            <span>Studio Chief</span>
+            <button onclick="closeWindow('studiochief')">X</button>
+        </div>
+        <div class="window-content">
+            <div class="icon" onclick="openImageWindow('studiochief-homepage')">
+                <img src="img/studiochief_image_icon.png" alt="Studio Chief">
+                <span>studiochief .jpg</span>
+            </div>
+            <a href="https://www.studiochief.nl/" target="_blank">
+                <div class="icon">
+                    <img src="img/File.png" alt="Studio Chief">
+                    <span>studiochief .exe</span>
+                </div>
+            </a>
+            <div class="icon" onclick="openImageWindow('studiochief_design_proces')">
+                <img src="img/Bestand.png" alt="Design Process">
+                <span>Design Process</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- DE PUL VENSTER -->
+    <div id="depul-window" class="window">
+        <div class="window-header">
+            <span>De Pul</span>
+            <button onclick="closeWindow('depul')">X</button>
+        </div>
+        <div class="window-content">
+            <div class="icon" onclick="openImageWindow('depul-homepage')">
+                <img src="img/depul_image_icon.png" alt="De Pul">
+                <span>depul.jpg</span>
+            </div>
+            <a href="https://www.figma.com/proto/yGj3Zvi6fCPIK9TAl8dKeD/Werken-Bij-Pagina-De-Pul?page-id=223%3A3810&node-id=223-4455&viewport=1176%2C1375%2C0.13&t=yUM9EMXksFyJS0rD-1&scaling=min-zoom&content-scaling=fixed" target="_blank">
+                <div class="icon">
+                    <img src="img/File.png" alt="De Pul">
+                    <span>depul.exe</span>
+                </div>
+            </a>
+            <div class="icon" onclick="openImageWindow('depul_design_proces')">
+                <img src="img/Bestand.png" alt="Design Process">
+                <span>Design Process</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diverse Window -->
+    <div id="diverse-window" class="window">
+        <div class="window-header">
+            <span>Other</span>
+            <button onclick="closeWindow('diverse')">X</button>
+        </div>
+        <div class="window-content">
+            <div class="icon" onclick="openImageWindow('x2com-navigation')">
+                <img src="img/divers-image.png" alt="Project 1">
+                <span>x2com-nav .jpg</span>
+            </div>
+            <div class="icon" onclick="openImageWindow('dezeeuw-energie')">
+                <img src="img/divers-image.png" alt="Project 2">
+                <span>de-zeeuw .jpg</span>
+            </div>
+            <div class="icon" onclick="openImageWindow('clearvox-dashboard')">
+                <img src="img/divers-image.png" alt="Project 3">
+                <span>clearvox- dashboard .jpg</span>
+            </div>
+            <div class="icon" onclick="openImageWindow('awaretrain')">
+                <img src="img/divers-image.png" alt="Project 4">
+                <span>awaretrain .jpg</span>
+            </div>
+            <a href="https://www.figma.com/proto/bNgH2bil2LxHsniMChRmTV/Security-Awareness?page-id=0%3A1&node-id=52-34&viewport=-1521%2C385%2C0.36&t=godG5npJ5zqlMWaM-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=80%3A2/" target="_blank">
+                <div class="icon">
+                    <img src="img/File.png" alt="De Pul">
+                    <span>awaretrain .exe</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+    <!-- MC UDEN AFBEELDING VENSTER -->
+    <div id="image-viewer-window" class="window">
+        <div class="window-header">
+            <span id="image-viewer-title">Image</span>
+            <button onclick="closeWindow('image-viewer')">X</button>
+        </div>
+        <div class="window-content">
+            <img id="displayed-image" src="" alt="Displayed Image">
+        </div>
+    </div>
+
+    <!-- PRULLENBAK VENSTER -->
+    <div id="trashcan-window" class="window">
+        <div class="window-header">
+            <span>Trashcan</span>
+            <button onclick="closeWindow('trashcan')">X</button>
+        </div>
+        <div class="window-content">
+            <div class="icon" onclick="openErrorWindow('image.jpg')">
+                <img src="img/chief-image.png" alt="Foto">
+                <span>image.jpg</span>
+            </div>
+            <div class="icon" onclick="openErrorWindow('Old Designs')">
+                <img src="img/Bestand.png" alt="Map">
+                <span>Old Designs</span>
+            </div>
+            <div class="icon" onclick="openErrorWindow('Computervirus')">
+                <img src="img/Virus.png" alt="Virus">
+                <span>!VIRUS! .exe</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ERROR VENSTER -->
+    <div id="error-window" class="window error-window">
+        <div class="window-header">
+            <span id="error-title">ERROR</span>
+            <button onclick="closeWindow('error')">X</button>
+        </div>
+        <div class="window-content">
+            <img src="img/error.png" alt="Error" class="error-icon">
+            <p id="error-message">There was an unexpected error.</p>
+            <button class="error-button" onclick="closeWindow('error')">OK</button>
+        </div>
+    </div>
+
+    <!-- SOFTWARE VENSTER -->
+    <div id="software-window" class="window">
+        <div class="window-header">
+            <span>Favourite Applications</span>
+            <button onclick="closeWindow('software')">X</button>
+        </div>
+        <div class="window-content">
+            <div class="icon">
+                <img src="img/figma.png" alt="Figma">
+                <span>Figma</span>
+            </div>
+            <div class="icon">
+                <img src="img/Illustrator.png" alt="Illustrator">
+                <span>Illustrator</span>
+            </div>
+            <div class="icon">
+                <img src="img/Photoshop.png" alt="Photoshop">
+                <span>Photoshop</span>
+            </div>
+            <div class="icon">
+                <img src="img/Premiere.png" alt="Premiere Pro">
+                <span>Premiere Pro</span>
+            </div>
+            <div class="icon">
+                <img src="img/Fl.png" alt="FL Studio">
+                <span>FL Studio</span>
+            </div>
+            <div class="icon">
+                <img src="img/Logic.png" alt="Logic Pro">
+                <span>Logic Pro</span>
+            </div>
+            <div class="icon">
+                <img src="img/Visual.png" alt="Logic Pro">
+                <span>Visual Studio Code</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MEDIA PLAYER VENSTER -->
+    <div id="media-player-window" class="window">
+        <div class="window-header">
+            <span>Media Player</span>
+            <button onclick="closeWindow('media-player')">X</button>
+        </div>
+        <div class="window-content" style="padding: 15px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px;">
+                <div class="media-item" onclick="playMedia('audio1')">
+                    <img class="audio-icon" src="img/audio.png" alt="Audio" style="width: 100%; height: auto;">
+                    <span>Muziek Track 1</span>
+                </div>
+                
+                <div class="media-item" onclick="playMedia('audio2')">
+                    <img src="img/audio-icon.png" alt="Audio" style="width: 100%; height: auto;">
+                    <span>Muziek Track 2</span>
+                </div>
+                
+                <div class="media-item" onclick="playMedia('video1')">
+                    <img src="img/video-icon.png" alt="Video" style="width: 100%; height: auto;">
+                    <span>Video Project 1</span>
+                </div>
+            </div>
+            
+            <div id="player-controls" style="margin-top: 20px; display: none; background: #f0f0f0; padding: 10px; border-radius: 5px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <button id="play-btn" onclick="togglePlay()">▶</button>
+                    <span id="now-playing">Nu afspelen: </span>
+                </div>
+                <audio id="audio-player" controls style="width: 100%; margin-top: 5px;"></audio>
+                <video id="video-player" controls style="width: 100%; margin-top: 5px; display: none;"></video>
+            </div>
+        </div>
+    </div>
+
+    <!-- TELEFOONBOEK VENSTER -->
+    <div id="phonebook-window" class="window" style="width: 800px; height: 500px;">
+        <div class="window-header">
+            <span>Telefoonboek</span>
+            <button onclick="closeWindow('phonebook')">X</button>
+        </div>
+        <div class="window-content" style="display: flex; height: calc(100% - 30px); padding: 0;">
+            <div style="width: 200px; height: 100%; border-right: 1px solid #ccc; overflow-y: auto; background-color: #f5f5f5;">
+                <div class="contact-name" onclick="showContact('contact1')">Jan Jansen</div>
+                <div class="contact-name" onclick="showContact('contact2')">Piet Pieters</div>
+                <div class="contact-name" onclick="showContact('contact3')">Marie van Dijk</div>
+                <div class="contact-name" onclick="showContact('contact4')">Lisa de Vries</div>
+            </div>
+            
+            <div id="contact-details" style="flex-grow: 1; padding: 20px; overflow-y: auto;">
+                <div style="text-align: center;">
+                    <img id="contact-photo" src="" alt="Profielfoto" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid #0078d7; margin-bottom: 20px;">
+                    <h2 id="contact-fullname" style="margin: 10px 0; color: #0078d7;"></h2>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <strong>Opdracht:</strong> <span id="contact-project"></span>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <strong>Datum:</strong> <span id="contact-date"></span>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <strong>Beschrijving:</strong> 
+                    <p id="contact-description" style="margin-top: 5px;"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
