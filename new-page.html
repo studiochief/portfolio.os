@@ -7,14 +7,24 @@
     <title>Portfolio.os</title>
     <!-- CSS -->
     <link rel="stylesheet" href="css/new-page.css">
+    <!-- Audio -->
+    <audio id="startup-chime" src="media/startup-chime.wav.mp3" preload="auto"></audio>
+    <audio id="click-sound" src="media/click.wav" preload="auto"></audio>
+    <audio id="error-sound" src="media/error-sound.mp3" preload="auto"></audio>
     <!-- JAVA -->
     <script defer src="js/new-page.js"></script>
     <!--FAVICON -->
-    <link rel="icon" href="img/Contact-icon.png" type="image/png">
-    <link rel="shortcut icon" href="img/Contact-icon.png" type="image/png">
+    <link rel="icon" href="Contact-icon.png">
+    <link rel="shortcut icon" href="Contact-icon.png">
 </head>
 
 <body>
+    <!-- Background -->
+    <div class="background-fade"></div>
+
+    <!-- CRT Overlay -->
+    <div class="crt-overlay"></div>
+
     <!-- INSTRUCTIONS POPUP -->
     <div id="instructions-window" class="window">
         <div class="window-header">
@@ -25,9 +35,10 @@
             <p><strong>How does it work?</strong></p>
             <ul style="margin-top: 10px; padding-left: 20px;">
                 <li>Click on icons to open programs</li>
-                <li>Don't drag windows (just like Windows 98!)</li>
-                <li>Double-clicking does nothing (for real nostalgia)</li>
+                <li>Don't drag windows</li>
+                <li>Double-clicking does nothing</li>
                 <li>DO NOT check the trashcan</li>
+                <li>Reboot the system in the start menu</li>
             </ul>
             <div style="text-align: center; margin-top: 20px;">
                 <button 
@@ -172,6 +183,21 @@
                 <img src="img/Bestand.png" alt="MC Uden Project 2">
                 <span>Design Process</span>
             </div>
+            <div class="icon" onclick="openWindow('mcuden-text')">
+                <img src="img/File.png" alt="Text Editor">
+                <span>Tekst.txt</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MC UDEN TEXT EDITOR -->
+    <div id="mcuden-text-window" class="window" style="height: 200px;">
+        <div class="window-header">
+            <span>collaboration.txt</span>
+            <button onclick="closeWindow('mcuden-text')">X</button>
+        </div>
+        <div class="window-content" style="padding: 15px;">
+            Made in collaboration with advertising agency Lift3.
         </div>
     </div>
 
@@ -322,6 +348,20 @@
             <img src="img/error.png" alt="Error" class="error-icon">
             <p id="error-message">There was an unexpected error.</p>
             <button class="error-button" onclick="closeWindow('error')">OK</button>
+        </div>
+    </div>
+
+    <!-- MOBILE WARNING VENSTER -->
+    <div id="mobile-warning-window" class="window">
+        <div class="window-header">
+            <span>Viewport Warning</span>
+        </div>
+        <div class="window-content" style="text-align: center; padding: 20px;">
+            <img src="img/error.png" alt="Warning" style="width: 96px; height: 96px; margin-bottom: 20px;">
+            <p style="font-size: 20px; line-height: 1.5;">
+                This website is best viewed in desktop mode.
+                Please use a larger screen or switch to desktop view.
+            </p>
         </div>
     </div>
 

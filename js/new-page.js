@@ -1,5 +1,58 @@
+// Add this at the beginning of the file
+document.addEventListener('DOMContentLoaded', () => {
+    // Play startup chime
+    const startupChime = document.getElementById('startup-chime');
+    if (startupChime) {
+        startupChime.play().catch(error => {
+            console.log('Autoplay prevented:', error);
+        });
+    }
+    
+    // Start the staggered loading after a short delay
+    setTimeout(startStaggeredLoading, 500);
+});
+
+function startStaggeredLoading() {
+    const elements = [
+        ...document.querySelectorAll('.sidebar .icon'),
+        document.querySelector('.trashcan-container'),
+        document.querySelector('.taskbar'),
+        document.querySelector('.start-button'),
+        document.querySelector('.clock')
+    ];
+
+    // Add fade-in-element class to all elements
+    elements.forEach(el => {
+        if (el) el.classList.add('fade-in-element');
+    });
+
+    // Calculate total animation time
+    const delayBetweenElements = 200; // 200ms between each element
+    const totalElements = elements.length;
+    const totalAnimationTime = totalElements * delayBetweenElements;
+
+    // Stagger the animations
+    elements.forEach((el, index) => {
+        if (el) {
+            setTimeout(() => {
+                el.classList.add('show');
+            }, index * delayBetweenElements);
+        }
+    });
+
+    // Show instructions window after all elements have loaded
+    setTimeout(() => {
+        openWindow('instructions');
+    }, totalAnimationTime + 500); // Add extra 500ms buffer after last element
+}
+
 // Window management
 let openWindows = [];
+
+// Show instructions window on page load
+// window.addEventListener('load', () => {
+//     openWindow('instructions');
+// });
 
 function openWindow(windowId) {
     console.log(`Attempting to open window: ${windowId}`);
@@ -8,6 +61,11 @@ function openWindow(windowId) {
     if (!window) {
         console.error(`Window with ID ${windowId}-window not found`);
         return;
+    }
+    
+    // Play click sound when opening window, except for instructions and mobile warning
+    if (windowId !== 'instructions' && windowId !== 'mobile-warning') {
+        playSound('click-sound');
     }
     
     // Make sure the window is visible and on top
@@ -40,6 +98,11 @@ function closeWindow(windowId) {
     if (!window) {
         console.error(`Window with ID ${windowId}-window not found`);
         return;
+    }
+    
+    // Play click sound when closing window, except for instructions and mobile warning
+    if (windowId !== 'instructions' && windowId !== 'mobile-warning') {
+        playSound('click-sound');
     }
     
     // Add closing animation class
@@ -95,6 +158,9 @@ function openImageWindow(imageId) {
 
 // Error window
 function openErrorWindow(errorType) {
+    // Play error sound
+    playSound('error-sound');
+    
     // Close all open windows first
     const allWindows = document.querySelectorAll('.window');
     allWindows.forEach(window => {
@@ -263,4 +329,45 @@ document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
         goBackToIndex();
     }
-}); 
+});
+
+// Sound effects
+function playSound(soundId) {
+    const sound = document.getElementById(soundId);
+    if (sound) {
+        sound.currentTime = 0; // Reset the sound to start
+        // Set volume to 0.2 (20%) for click sound, 1 (100%) for other sounds
+        sound.volume = soundId === 'click-sound' ? 0.2 : 1;
+        sound.play().catch(error => {
+            console.log('Sound playback prevented:', error);
+        });
+    }
+}
+
+// Add click sound to all icons
+document.addEventListener('DOMContentLoaded', () => {
+    const icons = document.querySelectorAll('.icon');
+    icons.forEach(icon => {
+        icon.addEventListener('click', () => {
+            playSound('click-sound');
+        });
+    });
+});
+
+// Viewport size checking
+function checkViewportSize() {
+    const mobileWarningWindow = document.getElementById('mobile-warning-window');
+    const isMobile = window.innerWidth < 768; // Adjust this value based on your needs
+    
+    if (isMobile && !mobileWarningWindow.classList.contains('active')) {
+        openWindow('mobile-warning');
+        mobileWarningWindow.classList.add('active');
+    } else if (!isMobile && mobileWarningWindow.classList.contains('active')) {
+        closeWindow('mobile-warning');
+        mobileWarningWindow.classList.remove('active');
+    }
+}
+
+// Add event listeners for viewport size changes
+window.addEventListener('load', checkViewportSize);
+window.addEventListener('resize', checkViewportSize); 
