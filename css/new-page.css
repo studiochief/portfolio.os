@@ -5,7 +5,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../img/background-image2.png');
+    background-image: url('../img/background-image3.png');
     background-size: cover;
     background-position: center;
     background-color: #111;
@@ -265,6 +265,7 @@ body {
     align-items: center;
     padding: 0 10px;
     z-index: 99;
+    border-top: 1px solid rgba(255, 255, 255, 0.8);
 }
 
 .start-button {
@@ -287,10 +288,7 @@ body {
     margin-right: 20px;
     text-align: right;
     background-color: #005a9e;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 15px;
 }
 
 /* Start Menu */
@@ -302,13 +300,24 @@ body {
     background-color: #0078d7;
     border: 1px solid #005a9e;
     display: none;
-    z-index: 98;
+    z-index: 1500;
 }
 
 .start-menu-item {
     padding: 10px;
     color: white;
     cursor: pointer;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.8);
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.8);
+    background-color: #0078d7;
+}
+
+.start-menu-item:first-child {
+    border-top: none;
+}
+
+.start-menu-item:last-child {
+    border-bottom: none;
 }
 
 .start-menu-item:hover {
@@ -561,7 +570,7 @@ body::before {
 
 /* Mobile warning styles */
 @media (max-width: 767px) {
-    body > *:not(#mobile-warning-window):not(.background-fade):not(.crt-overlay) {
+    body.mobile-warning-active > *:not(#mobile-warning-window):not(.background-fade):not(.crt-overlay) {
         display: none !important;
     }
     
@@ -579,14 +588,33 @@ body::before {
     }
 
     #mobile-warning-window .window-header {
-        justify-content: flex-start !important;
+        justify-content: space-between !important;
         padding: 12px !important;
     }
 
     #mobile-warning-window .window-header span {
         font-size: 18px !important;
         font-weight: bold !important;
-        margin-left: 12px !important;
+    }
+
+    #mobile-warning-window .window-header button {
+        background: #e2e2e2 !important;
+        border: 1px solid #ccc !important;
+        color: #333 !important;
+        cursor: pointer !important;
+        width: 24px !important;
+        height: 24px !important;
+        font-weight: bold !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: background-color 0.2s !important;
+    }
+
+    #mobile-warning-window .window-header button:hover {
+        background-color: #ff0000 !important;
+        color: white !important;
+        border-color: #cc0000 !important;
     }
 
     #mobile-warning-window .window-content {
@@ -597,14 +625,401 @@ body::before {
     }
 
     #mobile-warning-window .window-content img {
-        width: 128px !important;
-        height: 128px !important;
+        width: 96px !important;
+        height: 96px !important;
         margin: 0 auto 20px !important;
     }
 
     #mobile-warning-window .window-content p {
         text-align: center !important;
         margin: 0 !important;
+        font-size: 18px !important;
+        line-height: 1.5 !important;
+    }
+
+    #mobile-warning-window .window-content button {
+        margin-top: 20px !important;
+        padding: 10px 20px !important;
+        background: #0078d7 !important;
+        color: white !important;
+        border: none !important;
+        cursor: pointer !important;
+        font-size: 16px !important;
+        border-radius: 4px !important;
+    }
+
+    #mobile-warning-window .window-content button:hover {
+        background: #005a9e !important;
+    }
+
+    /* Portfolio Window Mobile Styles */
+    #portfolio-window {
+        width: 90vw !important;
+        height: 45vh !important;
+        min-width: auto !important;
+        max-width: none !important;
+    }
+
+    #portfolio-window .window-content {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important;
+        gap: 10px !important;
+        padding: 15px !important;
+        height: calc(100% - 40px) !important;
+        overflow-y: auto !important;
+    }
+
+    #portfolio-window .icon {
+        width: 80px !important;
+        margin: 5px !important;
+    }
+
+    #portfolio-window .icon img {
+        width: 70px !important;
+        height: 70px !important;
+    }
+
+    #portfolio-window .icon span {
+        width: 80px !important;
+        font-size: 15px !important;
+        padding: 6px !important;
+    }
+
+    /* Trashcan Window Mobile Styles */
+    #trashcan-window {
+        width: 90vw !important;
+        height: 45vh !important;
+        min-width: auto !important;
+        max-width: none !important;
+    }
+
+    #trashcan-window .window-content {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important;
+        gap: 10px !important;
+        padding: 15px !important;
+        height: calc(100% - 40px) !important;
+        overflow-y: auto !important;
+    }
+
+    /* Contact Window Mobile Styles */
+    #contact-window {
+        width: 90vw !important;
+        height: auto !important;
+        min-width: auto !important;
+        max-width: none !important;
+    }
+
+    #contact-window .window-content {
+        padding: 10px !important;
+        height: auto !important;
+    }
+
+    #contact-window .window-content img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    /* About Me Window Mobile Styles */
+    #over-mij-window {
+        width: 90vw !important;
+        height: 69vh !important;
+        min-width: auto !important;
+        max-width: none !important;
+        max-height: 69vh !important;
+    }
+
+    #over-mij-window .window-content {
+        padding: 10px !important;
+        height: calc(100% - 40px) !important;
+        overflow-y: auto !important;
+    }
+
+    #over-mij-window .window-content img {
+        width: 100% !important;
+        height: auto !important;
+        max-width: none !important;
+    }
+
+    /* Software Window Mobile Styles */
+    #software-window {
+        width: 90vw !important;
+        height: 60vh !important;
+        min-width: auto !important;
+        max-width: none !important;
+    }
+
+    #software-window .window-content {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important;
+        gap: 10px !important;
+        padding: 15px !important;
+        height: calc(100% - 40px) !important;
+        overflow-y: auto !important;
+    }
+
+    /* General Mobile Window Styles */
+    .window {
+        width: 90vw !important;
+        max-width: none !important;
+        min-height: auto !important;
+        height: auto !important;
+    }
+    
+    .window-content {
+        max-height: 60vh !important;
+        overflow-y: auto !important;
+    }
+    
+    .icon {
+        width: 80px !important;
+    }
+    
+    .icon img {
+        width: 70px !important;
+        height: 70px !important;
+    }
+    
+    .icon span {
+        font-size: 15px !important;
+        width: 80px !important;
+        padding: 6px !important;
+    }
+    
+    .taskbar {
+        height: 48px !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.8) !important;
+    }
+    
+    .start-button {
+        font-size: 16px !important;
+        padding: 0 15px !important;
+    }
+    
+    .clock {
+        font-size: 16px !important;
+        padding: 12px 15px !important;
+        margin-right: 15px !important;
+    }
+
+    /* MC uden Window Mobile Styles */
+    #mcuden-window {
+        width: 90vw !important;
+        height: 45vh !important;
+        min-width: auto !important;
+        max-width: none !important;
+    }
+
+    #mcuden-window .window-content {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important;
+        gap: 10px !important;
+        padding: 15px !important;
+        height: calc(100% - 40px) !important;
+        overflow-y: auto !important;
+    }
+
+    /* VHS Window Mobile Styles */
+    #vhs-window {
+        width: 90vw !important;
+        height: 45vh !important;
+        min-width: auto !important;
+        max-width: none !important;
+    }
+
+    #vhs-window .window-content {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important;
+        gap: 10px !important;
+        padding: 15px !important;
+        height: calc(100% - 40px) !important;
+        overflow-y: auto !important;
+    }
+
+    /* Studio Chief Window Mobile Styles */
+    #studiochief-window {
+        width: 90vw !important;
+        height: 45vh !important;
+        min-width: auto !important;
+        max-width: none !important;
+    }
+
+    #studiochief-window .window-content {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important;
+        gap: 10px !important;
+        padding: 15px !important;
+        height: calc(100% - 40px) !important;
+        overflow-y: auto !important;
+    }
+
+    /* Depul Window Mobile Styles */
+    #depul-window {
+        width: 90vw !important;
+        height: 45vh !important;
+        min-width: auto !important;
+        max-width: none !important;
+    }
+
+    #depul-window .window-content {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important;
+        gap: 10px !important;
+        padding: 15px !important;
+        height: calc(100% - 40px) !important;
+        overflow-y: auto !important;
+    }
+
+    /* Diverse Window Mobile Styles */
+    #diverse-window {
+        width: 90vw !important;
+        height: 45vh !important;
+        min-width: auto !important;
+        max-width: none !important;
+    }
+
+    #diverse-window .window-content {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important;
+        gap: 10px !important;
+        padding: 15px !important;
+        height: calc(100% - 40px) !important;
+        overflow-y: auto !important;
+    }
+
+    /* Image Viewer Window Mobile Styles */
+    #image-viewer-window {
+        width: 90vw !important;
+        height: auto !important;
+        min-width: auto !important;
+        max-width: none !important;
+        max-height: 60vh !important; /* Maximum height cap */
+    }
+
+    #image-viewer-window .window-content {
+        padding: 10px !important;
+        height: auto !important;
+        min-height: auto !important;
+        overflow-y: auto !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+    }
+
+    #image-viewer-window .window-content img {
+        width: 100% !important;
+        height: auto !important;
+        max-width: none !important;
+        display: block !important;
+        margin: 0 !important;
+    }
+
+    .start-menu {
+        bottom: 48px !important;
+        width: 100% !important;
+        left: 0 !important;
+        border: none !important;
+        z-index: 1500 !important;
+    }
+    
+    .start-menu-item {
+        padding: 12px 15px !important;
+        font-size: 16px !important;
+        width: 100% !important;
+        border-top: 0.5px solid rgba(255, 255, 255, 0.8) !important;
+        border-bottom: 0.5px solid rgba(255, 255, 255, 0.8) !important;
+        box-sizing: border-box !important;
+        background-color: #0078d7 !important;
+    }
+
+    .start-menu-item:first-child {
+        border-top: none !important;
+    }
+
+    .start-menu-item:last-child {
+        border-bottom: none !important;
+    }
+
+    .start-menu-item:hover {
+        background-color: #005a9e !important;
+    }
+
+    /* Text Editor Windows Mobile Styles */
+    #mcuden-text-window,
+    #vhs-text-window,
+    #depul-text-window,
+    #diverse-text-window {
+        width: 85vw !important;
+        min-width: 85vw !important;
+        max-width: 85vw !important;
+        height: 200px !important;
+        min-height: 200px !important;
+        max-height: 200px !important;
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.45) !important;
+    }
+
+    #mcuden-text-window .window-content,
+    #vhs-text-window .window-content,
+    #depul-text-window .window-content,
+    #diverse-text-window .window-content {
+        width: 100% !important;
+        height: calc(100% - 40px) !important;
+        padding: 12px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Standardize all text to 15px */
+    .icon span,
+    .start-button,
+    .clock,
+    .start-menu-item,
+    .window-header span,
+    #mcuden-text-window .window-content p,
+    #vhs-text-window .window-content p,
+    #depul-text-window .window-content p,
+    #diverse-text-window .window-content p,
+    #portfolio-window .icon span {
+        font-size: 15px !important;
+    }
+
+    /* Start Menu and Taskbar Text */
+    .start-button {
+        font-size: 16px !important;
+        padding: 0 15px !important;
+    }
+    
+    .clock {
+        font-size: 16px !important;
+        padding: 12px 15px !important;
+        margin-right: 15px !important;
+    }
+    
+    .start-menu-item {
+        padding: 12px 15px !important;
+        font-size: 16px !important;
+        width: 100% !important;
+        border-top: 0.5px solid rgba(255, 255, 255, 0.8) !important;
+        border-bottom: 0.5px solid rgba(255, 255, 255, 0.8) !important;
+        box-sizing: border-box !important;
+        background-color: #0078d7 !important;
+    }
+
+    /* Window Headers */
+    .window-header span {
+        font-size: 15px !important;
+    }
+
+    /* Text Editor Content */
+    #mcuden-text-window .window-content p,
+    #vhs-text-window .window-content p,
+    #depul-text-window .window-content p,
+    #diverse-text-window .window-content p {
+        font-size: 15px !important;
+    }
+
+    /* Portfolio Window Icons */
+    #portfolio-window .icon span {
+        font-size: 15px !important;
     }
 }
 
@@ -617,7 +1032,8 @@ body::before {
     min-height: 200px !important;
     max-height: 200px !important;
     width: 400px !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.45) !important;
+    border: none !important;
 }
 
 #mcuden-text-window .window-content,
@@ -626,7 +1042,7 @@ body::before {
 #diverse-text-window .window-content {
     height: calc(100% - 72px) !important;
     overflow: hidden !important;
-    border: 1px solid #ccc !important;
+    border: none !important;
     border-top: none !important;
     padding: 15px !important;
     display: block !important;
@@ -646,6 +1062,90 @@ body::before {
     font-size: 14px !important;
     line-height: 1.4 !important;
     white-space: pre-wrap !important;
+}
+
+/* Fade to black animation */
+.fade-to-black {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+    animation: fadeIn 2s steps(8) forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Mobile View Handling */
+body.mobile-view > *:not(.background-fade):not(.crt-overlay):not(#mobile-warning-window) {
+    display: none !important;
+}
+
+body.mobile-view #mobile-warning-window {
+    display: block !important;
+    z-index: 9999;
+}
+
+/* Contact Window Image Handling */
+#contact-window .window-content img.contact-image-desktop {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+#contact-window .window-content img.contact-image-mobile {
+    display: none;
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 767px) {
+    #contact-window .window-content img.contact-image-desktop {
+        display: none !important;
+    }
+
+    #contact-window .window-content img.contact-image-mobile {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+}
+
+/* About Me Window Image Handling */
+#over-mij-window .window-content img.about-me-image-desktop {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
+}
+
+#over-mij-window .window-content img.about-me-image-mobile {
+    display: none;
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 767px) {
+    #over-mij-window .window-content img.about-me-image-desktop {
+        display: none !important;
+    }
+
+    #over-mij-window .window-content img.about-me-image-mobile {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+    }
 }
 
 /* Rest of your existing styles... */

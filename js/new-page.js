@@ -100,9 +100,9 @@ function closeWindow(windowId) {
         return;
     }
     
-    // Play click sound when closing window, except for instructions and mobile warning
-    if (windowId !== 'instructions' && windowId !== 'mobile-warning') {
-        playSound('click-sound');
+    // Play close sound when closing window, except for mobile warning
+    if (windowId !== 'mobile-warning') {
+        playSound('close-sound');
     }
     
     // Add closing animation class
@@ -319,9 +319,20 @@ function showContact(contactId) {
 
 // Add this function at the top of the file, after the openWindows array
 function goBackToIndex() {
-    // Add a timestamp to the URL to prevent caching
-    const timestamp = new Date().getTime();
-    window.location.href = `index.html?t=${timestamp}`;
+    // Play closing chime
+    playSound('closing-chime');
+    
+    // Create and add fade element
+    const fadeElement = document.createElement('div');
+    fadeElement.className = 'fade-to-black';
+    document.body.appendChild(fadeElement);
+    
+    // Add a small delay before redirecting to allow the chime to play
+    setTimeout(() => {
+        // Add a timestamp to the URL to prevent caching
+        const timestamp = new Date().getTime();
+        window.location.href = `index.html?t=${timestamp}`;
+    }, 2000); // 2000ms (2 seconds) delay to let the chime play
 }
 
 // Add this event listener at the bottom of the file
@@ -336,8 +347,8 @@ function playSound(soundId) {
     const sound = document.getElementById(soundId);
     if (sound) {
         sound.currentTime = 0; // Reset the sound to start
-        // Set volume to 0.2 (20%) for click sound, 1 (100%) for other sounds
-        sound.volume = soundId === 'click-sound' ? 0.2 : 1;
+        // Set volume to 0.2 (20%) for click and close sounds, 0.5 (50%) for error sound, 1 (100%) for other sounds
+        sound.volume = soundId === 'error-sound' ? 0.5 : (soundId === 'click-sound' || soundId === 'close-sound') ? 0.2 : 1;
         sound.play().catch(error => {
             console.log('Sound playback prevented:', error);
         });
@@ -356,15 +367,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Viewport size checking
 function checkViewportSize() {
-    const mobileWarningWindow = document.getElementById('mobile-warning-window');
-    const isMobile = window.innerWidth < 768; // Adjust this value based on your needs
+    const isMobile = window.innerWidth <= 767;
+    const sidebar = document.querySelector('.sidebar');
+    const taskbar = document.querySelector('.taskbar');
+    const trashcan = document.querySelector('.trashcan-container');
+    const startMenu = document.getElementById('start-menu');
+    const instructionsWindow = document.getElementById('instructions-window');
     
-    if (isMobile && !mobileWarningWindow.classList.contains('active')) {
-        openWindow('mobile-warning');
-        mobileWarningWindow.classList.add('active');
-    } else if (!isMobile && mobileWarningWindow.classList.contains('active')) {
-        closeWindow('mobile-warning');
-        mobileWarningWindow.classList.remove('active');
+    if (isMobile) {
+        // Show mobile content
+        if (sidebar) sidebar.style.display = 'block';
+        if (taskbar) taskbar.style.display = 'flex';
+        if (trashcan) trashcan.style.display = 'block';
+        if (startMenu) startMenu.style.display = 'none';
+        if (instructionsWindow) instructionsWindow.style.display = 'block';
+    } else {
+        // Show desktop content
+        if (sidebar) sidebar.style.display = 'block';
+        if (taskbar) taskbar.style.display = 'flex';
+        if (trashcan) trashcan.style.display = 'block';
+        if (startMenu) startMenu.style.display = 'none';
+        if (instructionsWindow) instructionsWindow.style.display = 'block';
     }
 }
 

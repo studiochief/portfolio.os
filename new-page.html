@@ -8,9 +8,11 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/new-page.css">
     <!-- Audio -->
-    <audio id="startup-chime" src="media/startup-chime.wav.mp3" preload="auto"></audio>
+    <audio id="startup-chime" src="media/startup-chime.wav.mp3.wav" preload="auto"></audio>
     <audio id="click-sound" src="media/click.wav" preload="auto"></audio>
     <audio id="error-sound" src="media/error-sound.mp3" preload="auto"></audio>
+    <audio id="close-sound" src="media/close.wav" preload="auto"></audio>
+    <audio id="closing-chime" src="media/closing-chime.wav" preload="auto"></audio>
     <!-- JAVA -->
     <script defer src="js/new-page.js"></script>
     <!--FAVICON -->
@@ -52,7 +54,7 @@
     </div>
 
     <!-- DESKTOP APPLICATIES LINKSBOVEN -->
-    <div class="sidebar">
+    <div class="sidebar desktop-content">
         <!-- PORTFOLIO -->
         <div class="icon" onclick="openWindow('portfolio')">
             <img src="img/Bestand.png" alt="Portfolio">
@@ -76,7 +78,7 @@
     </div>
 
     <!-- PRULLENBAK -->
-    <div class="trashcan-container">
+    <div class="trashcan-container desktop-content">
         <div class="icon" onclick="openWindow('trashcan')">
             <img src="img/Trash.png" alt="Prullenbak">
             <span>Trashcan</span>
@@ -84,7 +86,7 @@
     </div>
 
     <!-- TASKBAR -->
-    <div class="taskbar">
+    <div class="taskbar desktop-content">
         <!-- STARTKNOP -->
         <button class="start-button" onclick="toggleStartMenu()">Start</button>
         <!-- KLOCK -->
@@ -97,7 +99,7 @@
         <div class="start-menu-item" onclick="openWindowAndCloseMenu('contact')">Contact</div>
         <div class="start-menu-item" onclick="openWindowAndCloseMenu('over-mij')">About Me</div>
         <div class="start-menu-item" onclick="openWindowAndCloseMenu('software')">Software</div>
-        <div class="start-menu-item" onclick="window.location.href='index.html?nocache=' + Date.now()">Reboot</div>
+        <div class="start-menu-item" onclick="goBackToIndex()">Reboot</div>
     </div>
 
     <!-- VENSTERS -->
@@ -140,9 +142,14 @@
         </div>
         <div class="window-content" style="display: flex; justify-content: center; align-items: center; padding: 0;">
             <img 
-                src="img/contact-informatie2.png" 
-                alt="Contactgegevens" 
-                style="max-width: 100%; max-height: 100%; object-fit: contain;"
+                src="img/contact-image-desktop.png" 
+                alt="Contact Information Desktop"
+                class="contact-image-desktop"
+            >
+            <img 
+                src="img/contact-image-mobile.png" 
+                alt="Contact Information Mobile"
+                class="contact-image-mobile"
             >
         </div>
     </div>
@@ -155,9 +162,14 @@
         </div>
         <div class="window-content" style="padding: 10px 10px 5px 10px;">
             <img 
-                src="img/about-me.png" 
-                alt="Over Mij informatie" 
-                style="width: 1095px; max-width: none; height: auto;"
+                src="img/about-me-image-desktop.png" 
+                alt="About Me Information Desktop"
+                class="about-me-image-desktop"
+            >
+            <img 
+                src="img/about-me-image-mobile.png" 
+                alt="About Me Information Mobile"
+                class="about-me-image-mobile"
             >
         </div>
     </div>
@@ -396,20 +408,6 @@
         </div>
     </div>
 
-    <!-- MOBILE WARNING VENSTER -->
-    <div id="mobile-warning-window" class="window">
-        <div class="window-header">
-            <span>Viewport Warning</span>
-        </div>
-        <div class="window-content" style="text-align: center; padding: 20px;">
-            <img src="img/error.png" alt="Warning" style="width: 96px; height: 96px; margin-bottom: 20px;">
-            <p style="font-size: 20px; line-height: 1.5;">
-                This website is best viewed in desktop mode.
-                Please use a larger screen or switch to desktop view.
-            </p>
-        </div>
-    </div>
-
     <!-- SOFTWARE VENSTER -->
     <div id="software-window" class="window">
         <div class="window-header">
@@ -514,6 +512,10 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="main-content desktop-content">
+        <!-- Main content here -->
     </div>
 </body>
 </html>
