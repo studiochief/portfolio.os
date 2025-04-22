@@ -75,6 +75,11 @@
             <img src="img/application_folder.png" alt="Software">
             <span>Software</span>
         </div>
+        <!-- SETTINGS -->
+        <div class="icon" onclick="openWindow('settings')">
+            <img src="img/settings-icon.png" alt="Settings">
+            <span>Settings</span>
+        </div>
     </div>
 
     <!-- PRULLENBAK -->
@@ -99,6 +104,7 @@
         <div class="start-menu-item" onclick="openWindowAndCloseMenu('contact')">Contact</div>
         <div class="start-menu-item" onclick="openWindowAndCloseMenu('over-mij')">About Me</div>
         <div class="start-menu-item" onclick="openWindowAndCloseMenu('software')">Software</div>
+        <div class="start-menu-item" onclick="openWindowAndCloseMenu('settings')">Settings</div>
         <div class="start-menu-item" onclick="goBackToIndex()">Reboot</div>
     </div>
 
@@ -510,6 +516,30 @@
                     <strong>Beschrijving:</strong> 
                     <p id="contact-description" style="margin-top: 5px;"></p>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SETTINGS VENSTER -->
+    <div id="settings-window" class="window">
+        <div class="window-header">
+            <span>Settings</span>
+            <button onclick="closeWindow('settings')">X</button>
+        </div>
+        <div class="window-content" style="padding: 20px;">
+            <div class="setting-item">
+                <span>CRT Scanline Effect</span>
+                <label class="switch">
+                    <input type="checkbox" id="crt-toggle" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="setting-item">
+                <span>Simple Background</span>
+                <label class="switch">
+                    <input type="checkbox" id="simple-bg-toggle">
+                    <span class="slider"></span>
+                </label>
             </div>
         </div>
     </div>

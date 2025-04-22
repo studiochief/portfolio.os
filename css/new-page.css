@@ -41,7 +41,14 @@ body {
     z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+}
+
+.sidebar .icon {
+    margin-bottom: 20px;
+}
+
+.sidebar .icon:last-child {
+    margin-bottom: 0;
 }
 
 /* Icons */
@@ -893,7 +900,8 @@ body::before {
         height: auto !important;
         min-width: auto !important;
         max-width: none !important;
-        max-height: 60vh !important; /* Maximum height cap */
+        max-height: 60vh !important;
+        margin-top: -100px !important;
     }
 
     #image-viewer-window .window-content {
@@ -1146,6 +1154,74 @@ body.mobile-view #mobile-warning-window {
         width: 100% !important;
         height: auto !important;
     }
+}
+
+/* Settings Window */
+#settings-window {
+    width: 350px !important;
+    min-width: 350px !important;
+}
+
+/* Settings Window Styles */
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 14px;
+    padding: 10px 15px;
+    gap: 40px;
+}
+
+.setting-item span {
+    font-size: 15px;
+    color: #333;
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #0078d7;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
 }
 
 /* Rest of your existing styles... */

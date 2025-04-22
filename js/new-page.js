@@ -10,6 +10,44 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Start the staggered loading after a short delay
     setTimeout(startStaggeredLoading, 500);
+
+    // CRT Effect Toggle
+    const crtToggle = document.getElementById('crt-toggle');
+    const crtOverlay = document.querySelector('.crt-overlay');
+    
+    // Load saved preference
+    const crtEnabled = localStorage.getItem('crtEnabled');
+    if (crtEnabled !== null) {
+        crtToggle.checked = crtEnabled === 'true';
+        crtOverlay.style.display = crtEnabled === 'true' ? 'block' : 'none';
+    }
+
+    // Toggle CRT effect
+    crtToggle.addEventListener('change', () => {
+        const isEnabled = crtToggle.checked;
+        crtOverlay.style.display = isEnabled ? 'block' : 'none';
+        localStorage.setItem('crtEnabled', isEnabled);
+        playSound('click-sound');
+    });
+
+    // Background Toggle
+    const bgToggle = document.getElementById('simple-bg-toggle');
+    const backgroundElement = document.querySelector('.background-fade');
+    
+    // Load saved background preference
+    const simpleBgEnabled = localStorage.getItem('simpleBgEnabled');
+    if (simpleBgEnabled !== null) {
+        bgToggle.checked = simpleBgEnabled === 'true';
+        updateBackground(simpleBgEnabled === 'true');
+    }
+
+    // Toggle background
+    bgToggle.addEventListener('change', () => {
+        const isEnabled = bgToggle.checked;
+        updateBackground(isEnabled);
+        localStorage.setItem('simpleBgEnabled', isEnabled);
+        playSound('click-sound');
+    });
 });
 
 function startStaggeredLoading() {
@@ -199,12 +237,14 @@ function openErrorWindow(errorType) {
 
 // Start menu
 function toggleStartMenu() {
+    playSound('click-sound');
     const startMenu = document.getElementById('start-menu');
     startMenu.style.display = startMenu.style.display === 'block' ? 'none' : 'block';
 }
 
 // Function to open window and close start menu
 function openWindowAndCloseMenu(windowId) {
+    playSound('click-sound');
     openWindow(windowId);
     const startMenu = document.getElementById('start-menu');
     startMenu.style.display = 'none';
@@ -393,4 +433,16 @@ function checkViewportSize() {
 
 // Add event listeners for viewport size changes
 window.addEventListener('load', checkViewportSize);
-window.addEventListener('resize', checkViewportSize); 
+window.addEventListener('resize', checkViewportSize);
+
+// Add this function to handle background updates
+function updateBackground(useSimpleBackground) {
+    const backgroundElement = document.querySelector('.background-fade');
+    if (useSimpleBackground) {
+        backgroundElement.style.backgroundImage = 'none';
+        backgroundElement.style.backgroundColor = '#666';
+    } else {
+        backgroundElement.style.backgroundImage = 'url("../img/background-image3.png")';
+        backgroundElement.style.backgroundColor = '#111';
+    }
+} 
