@@ -29,25 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('crtEnabled', isEnabled);
         playSound('click-sound');
     });
-
-    // Background Toggle
-    const bgToggle = document.getElementById('simple-bg-toggle');
-    const backgroundElement = document.querySelector('.background-fade');
-    
-    // Load saved background preference
-    const simpleBgEnabled = localStorage.getItem('simpleBgEnabled');
-    if (simpleBgEnabled !== null) {
-        bgToggle.checked = simpleBgEnabled === 'true';
-        updateBackground(simpleBgEnabled === 'true');
-    }
-
-    // Toggle background
-    bgToggle.addEventListener('change', () => {
-        const isEnabled = bgToggle.checked;
-        updateBackground(isEnabled);
-        localStorage.setItem('simpleBgEnabled', isEnabled);
-        playSound('click-sound');
-    });
 });
 
 function startStaggeredLoading() {
@@ -81,18 +62,32 @@ function startStaggeredLoading() {
     // Show instructions window after all elements have loaded
     setTimeout(() => {
         openWindow('instructions');
-    }, totalAnimationTime + 500); // Add extra 500ms buffer after last element
+    }, totalAnimationTime + 800); // Increased buffer to ensure all animations complete
+}
+
+// Add these functions for the portfolio glow effect
+function startPortfolioGlow() {
+    const portfolioIcon = document.querySelector('.sidebar .icon:first-child');
+    portfolioIcon.classList.add('glow');
+}
+
+function stopPortfolioGlow() {
+    const portfolioIcon = document.querySelector('.sidebar .icon:first-child');
+    portfolioIcon.classList.remove('glow');
 }
 
 // Window management
 let openWindows = [];
 
-// Show instructions window on page load
-// window.addEventListener('load', () => {
-//     openWindow('instructions');
-// });
+function setLoadingState(duration = 500) {
+    document.body.classList.add('loading-state');
+    setTimeout(() => {
+        document.body.classList.remove('loading-state');
+    }, duration);
+}
 
 function openWindow(windowId) {
+    setLoadingState();
     console.log(`Attempting to open window: ${windowId}`);
     const window = document.getElementById(`${windowId}-window`);
     
@@ -100,6 +95,9 @@ function openWindow(windowId) {
         console.error(`Window with ID ${windowId}-window not found`);
         return;
     }
+
+    // Stop the portfolio glow effect when any window is opened
+    stopPortfolioGlow();
     
     // Play click sound when opening window, except for instructions and mobile warning
     if (windowId !== 'instructions' && windowId !== 'mobile-warning') {
@@ -117,7 +115,7 @@ function openWindow(windowId) {
     // Remove animation class after it completes
     setTimeout(() => {
         window.classList.remove('window-opening');
-    }, 250); // Match animation duration
+    }, 250);
     
     // Add to open windows array if not already there
     if (!openWindows.includes(windowId)) {
@@ -130,6 +128,7 @@ function openWindow(windowId) {
 }
 
 function closeWindow(windowId) {
+    setLoadingState(300);
     console.log(`Attempting to close window: ${windowId}`);
     const window = document.getElementById(`${windowId}-window`);
     
@@ -159,7 +158,12 @@ function closeWindow(windowId) {
         
         // Update z-index of remaining windows
         updateWindowZIndex();
-    }, 250); // Match animation duration
+
+        // Start portfolio glow when instructions window is closed
+        if (windowId === 'instructions') {
+            startPortfolioGlow();
+        }
+    }, 250);
     
     console.log(`Window ${windowId} closed successfully`);
 }
@@ -433,16 +437,4 @@ function checkViewportSize() {
 
 // Add event listeners for viewport size changes
 window.addEventListener('load', checkViewportSize);
-window.addEventListener('resize', checkViewportSize);
-
-// Add this function to handle background updates
-function updateBackground(useSimpleBackground) {
-    const backgroundElement = document.querySelector('.background-fade');
-    if (useSimpleBackground) {
-        backgroundElement.style.backgroundImage = 'none';
-        backgroundElement.style.backgroundColor = '#666';
-    } else {
-        backgroundElement.style.backgroundImage = 'url("../img/background-image3.png")';
-        backgroundElement.style.backgroundColor = '#111';
-    }
-} 
+window.addEventListener('resize', checkViewportSize); 
