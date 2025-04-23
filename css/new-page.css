@@ -491,10 +491,10 @@ body {
 #portfolio-window,
 #contact-window,
 #software-window,
-#mcuden-window,
+/* #mcuden-window, */
 #vhs-window,
 #studiochief-window,
-#depul-window,
+/* #depul-window, */
 #diverse-window,
 #image-viewer-window,
 #trashcan-window {
@@ -809,23 +809,6 @@ body::before {
         margin-right: 15px !important;
     }
 
-    /* MC uden Window Mobile Styles */
-    #mcuden-window {
-        width: 90vw !important;
-        height: 45vh !important;
-        min-width: auto !important;
-        max-width: none !important;
-    }
-
-    #mcuden-window .window-content {
-        display: grid !important;
-        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important;
-        gap: 10px !important;
-        padding: 15px !important;
-        height: calc(100% - 40px) !important;
-        overflow-y: auto !important;
-    }
-
     /* VHS Window Mobile Styles */
     #vhs-window {
         width: 90vw !important;
@@ -852,23 +835,6 @@ body::before {
     }
 
     #studiochief-window .window-content {
-        display: grid !important;
-        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important;
-        gap: 10px !important;
-        padding: 15px !important;
-        height: calc(100% - 40px) !important;
-        overflow-y: auto !important;
-    }
-
-    /* Depul Window Mobile Styles */
-    #depul-window {
-        width: 90vw !important;
-        height: 45vh !important;
-        min-width: auto !important;
-        max-width: none !important;
-    }
-
-    #depul-window .window-content {
         display: grid !important;
         grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important;
         gap: 10px !important;
@@ -953,9 +919,9 @@ body::before {
     }
 
     /* Text Editor Windows Mobile Styles */
-    #mcuden-text-window,
+    /* #mcuden-text-window, */
     #vhs-text-window,
-    #depul-text-window,
+    /* #depul-text-window, */
     #diverse-text-window {
         width: 85vw !important;
         min-width: 85vw !important;
@@ -966,9 +932,9 @@ body::before {
         box-shadow: 0 6px 25px rgba(0, 0, 0, 0.45) !important;
     }
 
-    #mcuden-text-window .window-content,
+    /* #mcuden-text-window .window-content,
+    #depul-text-window .window-content, */
     #vhs-text-window .window-content,
-    #depul-text-window .window-content,
     #diverse-text-window .window-content {
         width: 100% !important;
         height: calc(100% - 40px) !important;
@@ -982,9 +948,9 @@ body::before {
     .clock,
     .start-menu-item,
     .window-header span,
-    #mcuden-text-window .window-content p,
+    /* #mcuden-text-window .window-content p,
+    #depul-text-window .window-content p, */
     #vhs-text-window .window-content p,
-    #depul-text-window .window-content p,
     #diverse-text-window .window-content p,
     #portfolio-window .icon span {
         font-size: 15px !important;
@@ -1018,9 +984,9 @@ body::before {
     }
 
     /* Text Editor Content */
-    #mcuden-text-window .window-content p,
+    /* #mcuden-text-window .window-content p,
+    #depul-text-window .window-content p, */
     #vhs-text-window .window-content p,
-    #depul-text-window .window-content p,
     #diverse-text-window .window-content p {
         font-size: 15px !important;
     }
@@ -1032,9 +998,9 @@ body::before {
 }
 
 /* Text Editor Windows */
-#mcuden-text-window,
+/* #mcuden-text-window, */
 #vhs-text-window,
-#depul-text-window,
+/* #depul-text-window, */
 #diverse-text-window {
     height: 200px !important;
     min-height: 200px !important;
@@ -1044,9 +1010,9 @@ body::before {
     border: none !important;
 }
 
-#mcuden-text-window .window-content,
+/* #mcuden-text-window .window-content,
+#depul-text-window .window-content, */
 #vhs-text-window .window-content,
-#depul-text-window .window-content,
 #diverse-text-window .window-content {
     height: calc(100% - 72px) !important;
     overflow: hidden !important;
@@ -1061,9 +1027,9 @@ body::before {
     gap: 0 !important;
 }
 
-#mcuden-text-window .window-content p,
+/* #mcuden-text-window .window-content p,
+#depul-text-window .window-content p, */
 #vhs-text-window .window-content p,
-#depul-text-window .window-content p,
 #diverse-text-window .window-content p {
     margin: 0 !important;
     font-family: monospace !important;
